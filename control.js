@@ -366,6 +366,17 @@ const fake = {
     } 
     }
 
+    let yutu = `https://youtu${m.text.slice(13)}`
+
+    if (m.text.includes(yutu)) {
+        if (isLimit(m.sender, limitCount, limit)) return console.log(`Limit beliau sudah habis jir`)
+                        limitAdd(sender, limit)
+    var url = yutu
+    var yt = await dl.youtubedl(url).catch(async () => await  dl.youtubedl(url))
+    var dl_url = await yt.audio['128kbps'].download()
+    bob.sendMessage(m.chat, {audio: {url: dl_url}, mimetype: 'audio/mp4', ptt: true}, {quoted: m})
+    }
+
     // GAME 
     cekWaktuGame(bob, tebakgambar)
     if (isPlayGame(m.chat, tebakgambar) ) {
@@ -416,107 +427,6 @@ if (isPlayGame(m.chat, tebaklagu) ) {
     
     // Premium
     _prem.expiredCheck(bob, premium)
-    let yutu = `https://youtu${m.text.slice(13)}`
-
-if (m.text.includes(yutu)) {
-    if (isLimit(m.sender, limitCount, limit)) return reply (`Poin kamu sudah habis silahkan kirim ${prefix}poin untuk mengecek Point Yang Tersedia`)
-                    limitAdd(sender, limit)
-var url = yutu
-var yt = await dl.youtubedl(url).catch(async () => await  dl.youtubedl(url))
-var dl_url = await yt.audio['128kbps'].download()
-bob.sendMessage(m.chat, {document: {url: dl_url}, fileName: yt.title + `.mp3`, mimetype: 'audio/mp4', caption: yt.title}, {quoted: m})
-}
-let tt = `https://vt.tiktok${m.text.slice(17)}`
-
-if (m.text.includes(tt)) {
-    if (isLimit(m.sender, limitCount, limit)) return reply (`Poin kamu sudah habis silahkan kirim ${prefix}poin untuk mengecek Point Yang Tersedia`)
-                    limitAdd(sender, limit)
-var url = tt
-dl.savefrom(url).then ( data => {
-reply(`*[ TIKTOK ]*\n\nTitle : ${data[0].meta.title}\nDurasi : ${data[0].meta.duration}\n\n_Wait A Minute._`)
-bob.sendMessage(m.chat, {video: {url: data[0].url[0].url}, caption: data[0].meta.title})
-})
-}
-let tt2 = `https://www.tiktok.com/${m.text.slice(23)}`
-
-if (m.text.includes(tt2)) {
-    if (isLimit(m.sender, limitCount, limit)) return reply (`Poin kamu sudah habis silahkan kirim ${prefix}poin untuk mengecek Point Yang Tersedia`)
-                    limitAdd(sender, limit)
-var url = tt2
-dl.savefrom(url).then ( data => {
-reply(`*[ TIKTOK ]*\n\nTitle : ${data[0].meta.title}\nDurasi : ${data[0].meta.duration}\n\n_Wait A Minute._`)
-bob.sendMessage(m.chat, {video: {url: data[0].url[0].url}, caption: data[0].meta.title})
-})
-}
-let tt3 = `https://vm.tiktok${m.text.slice(17)}`
-
-if (m.text.includes(tt3)) {
-    if (isLimit(m.sender, limitCount, limit)) return reply (`Poin kamu sudah habis silahkan kirim ${prefix}poin untuk mengecek Point Yang Tersedia`)
-                    limitAdd(sender, limit)
-var url = tt3
-dl.savefrom(url).then ( data => {
-reply(`*[ TIKTOK ]*\n\nTitle : ${data[0].meta.title}\nDurasi : ${data[0].meta.duration}\n\n_Wait A Minute._`)
-bob.sendMessage(m.chat, {video: {url: data[0].url[0].url}, caption: data[0].meta.title})
-})
-}
-let fbdl = `https://www.facebook.com/${m.text.slice(25)}`
-
-if (m.text.includes(fbdl)) {
-    if (isLimit(m.sender, limitCount, limit)) return reply (`Poin kamu sudah habis silahkan kirim ${prefix}poin untuk mengecek Point Yang Tersedia`)
-                    limitAdd(sender, limit)
-var url = fbdl
-dl.savefrom(url).then ( data => {
-reply(`*[ FACEBOOK ]*\n\nTitle : ${ data[0].meta.title}\nSize : HD\n\n_Wait A Minute._`)
-bob.sendMessage(m.chat, {video: {url: data[0].hd.url}, caption: data[0].meta.title})
-})
-}
-let igdl = `https://www.instagram.com/${m.text.slice(26)}`
-
-if (m.text.includes(igdl)) {
-    if (isLimit(m.sender, limitCount, limit)) return reply (`Poin kamu sudah habis silahkan kirim ${prefix}poin untuk mengecek Point Yang Tersedia`)
-                    limitAdd(sender, limit)
-var url = igdl
-reply(`*[ INSTAGRAM ]*\n\n_Wait A Minute._`)
-instagram(url).then( data => {
-for ( let i of data ) {
-if (i.type === "video") {
-bob.sendMessage(m.chat, {video: {url: i.url}}, {quoted: m})
-} else if (i.type === "image") {
-bob.sendMessage(m.chat, { caption: `Sukses, Follow Instagram : @arsrfii`, image: { url: i.url }})
-}
-}
-}).catch(() => reply(`Eror mas. P in owner coba`))
-}
-
-let twt = `https://twitter.com/${m.text.slice(20)}`
-
-if (m.text.includes(twt)) {
-    if (isLimit(m.sender, limitCount, limit)) return reply (`Poin kamu sudah habis silahkan kirim ${prefix}poin untuk mengecek Point Yang Tersedia`)
-                    limitAdd(sender, limit)
-var url = twt
-dl.savefrom(url).then( data => {
-reply(`*[ TWITTER ]*\n\nTitle : ${data[0].meta.title}\n\n_Wait A Minute._`)
-if (data[0].url[1].type === "mp4") {
-bob.sendMessage(m.chat, {video: {url: data[0].url[1].url}})
-} else if (data[0].url[1].type === "jpg") {
-bob.sendMessage(m.chat, {image: { url: data[0].url[1].url }})
-}
-}).catch(() => reply(`Eror mas. P in owner coba`))
-}
-
-let cp = `https://www.capcut.com/${m.text.slice(23)}`
-
-if (m.text.includes(cp)) {
-    if (isLimit(m.sender, limitCount, limit)) return reply (`Poin kamu sudah habis silahkan kirim ${prefix}poin untuk mengecek Point Yang Tersedia`)
-                    limitAdd(sender, limit)
-var url = cp
-capcut(url).then ( data => {
-reply(`*[ CAPCUT ]*\n\nUsername : ${data.nama}\nUsed : ${data.used} Pemakai\n\n_Wait A Minute._`)
-bob.sendMessage(m.chat, {video: {url: data.video}, caption: `${data.used} Telah Di Pakai`})
-} )
-}
-
-    
 async function loading() {
     const { key } = await bob.sendMessage(m.chat, {text: '「▱▱▱▱▱▱▱▱▱▱」Loading...'}, { quoted: m });
          await delay(1000);
@@ -588,11 +498,6 @@ function randomNomor(min, max = null) {
     return Math.floor(Math.random() * min) + 1
     }
     }
-        // Push Message To Console && Auto Read
-        if (m.message) {
-            addBalance(m.sender, randomNomor(60), balance)
-            bob.readMessages([m.key])           
-        }
 
 
         /*Privasi User!
@@ -692,7 +597,7 @@ Jam : ${jam}`) + `
             }
             break
             case 'setppgc': case 'setppgrup':{
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
                 if (!/image/.test(mime)) return reply( `Kirim/Reply Image Dengan Caption ${prefix + command}`)
                 if (/webp/.test(mime)) return reply( `Kirim/Reply Image Dengan Caption ${prefix + command}`)
                 let mediaa = await quoted.download()
@@ -774,7 +679,7 @@ Jam : ${jam}`) + `
                 
                 if (!q) return reply(`Masukan Text\nExample : ${prefix}hidetag Hallo`)
                 if (!m.isGroup) return reply(global.mess.group)
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
                 let mem = [];
         participants.map( i => mem.push(i.id) )
         bob.sendMessage(m.chat, { text: q ? q : '', mentions: mem }, {quoted: m})
@@ -783,7 +688,7 @@ Jam : ${jam}`) + `
             case 'totag': case 'tagbot': {
                 if (!isQuotedAudio && !isQuotedImage && !isQuotedSticker && !isQuotedVideo && q) return reply(`Silahkan Reply Audio/Image/Sticker/Video/Text Dengan Text : ${CmD}`)
                 if (!m.isGroup) return reply(global.mess.group)
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
                 if (isQuotedSticker) {
 
                     if (/image/.test(mime)) {
@@ -838,7 +743,7 @@ Jam : ${jam}`) + `
             break
              case 'tagall': {
                 if (!m.isGroup) return reply(global.mess.group)
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
                 var mems = []
                 var teks = `╔══ *TAG MEMBER*\n╠ Pesan : ${q !== undefined ? q : `Pesan Tidak Ada`}\n║\n`
                 for (let i of participants) {
@@ -850,8 +755,8 @@ Jam : ${jam}`) + `
              break
              case 'promote': case 'admin': case 'pm': {
                 if (!m.isGroup) return reply(global.mess.group)
-                if (!isBotGroupAdmins) return reply(global.mess.botAdmin)
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
+                
                 if (!quoted) return reply('Reply Pesan')
                  if (quoted) {
                 number = quoted.sender
@@ -863,10 +768,46 @@ Jam : ${jam}`) + `
                 }
              }
              break
+             case 'play': {
+
+                if (!q) return reply(`Masukan Text Setelah Perintah!\n\n*Example For Voice Not* : ${CmD} Jakarta Hari Ini - For revenge --vn\n*Example For Document :* ${CmD} Jakarta Hari Ini - For revenge -doc\n*Example For Video :* ${CmD} Jakarta Hari Ini - For revenge --video`)
+                loading2()
+                var pasu = `ptt`
+                if (q.includes('--vn')) {
+                var ytserc = await yts(q.replace('--vn', ''))
+                var url = ytserc.all[0].url
+                var yt = await dl.youtubedl(url).catch(async () => await  dl.youtubedl(url))
+                var dl_url = await yt.audio['128kbps'].download()
+                bob.sendMessage(m.chat, {image: {url: yt.thumbnail}, caption: `*[ YOUTUBE PLAY ]*\n\nTitle : ${yt.title}\nSize : 128kbps\nType : Voice Not\n_Audio Sedang Dikirim..._`}, {quoted: m})
+                bob.sendMessage(m.chat, {audio: {url: dl_url}, mimetype: `audio/mp4`, ptt: true}, {quoted: m})
+            } else 
+            if (q.includes('--doc')) {
+                var ytserc = await yts(q.replace('--doc', ''))
+                var url = ytserc.all[0].url
+                var yt = await dl.youtubedl(url).catch(async () => await  dl.youtubedl(url))
+                var dl_url = await yt.audio['128kbps'].download()
+                bob.sendMessage(m.chat, {image: {url: yt.thumbnail}, caption: `*[ YOUTUBE PLAY ]*\n\nTitle : ${yt.title}\nSize : 128kbps\nType : Document\n_Audio Sedang Dikirim..._`}, {quoted: m})
+                bob.sendMessage(m.chat, {document: {url: dl_url}, fileName: yt.title + `.mp3`, caption: yt.title + `\nhttps://my.arsrfii.repl.co`, mimetype: `audio/mp3`})
+            } else 
+            if (q.includes('--video')) {
+                var ytserc = await yts(q.replace('--video', ''))
+                var url = ytserc.all[0].url
+                var yt = await dl.youtubedl(url).catch(async () => await  dl.youtubedl(url))
+                var dl_url = await yt.video['720p'].download()
+                bob.sendMessage(m.chat, {image: {url: yt.thumbnail}, caption: `*[ YOUTUBE PLAY ]*\n\nTitle : ${yt.title}\nSize : 128kbps\nType : Video\nVideo Sedang Dikirim..._`}, {quoted: m})
+                bob.sendMessage(m.chat, {video: {url: dl_url}, caption: yt.title + `\nhttps://my.arsrfii.repl.co`}, {quoted: m})
+            } else {
+                var ytserc = await yts(q)
+                var url = ytserc.all[0].url
+                var yt = await dl.youtubedl(url).catch(async () => await  dl.youtubedl(url))
+                var dl_url = await yt.audio['128kbps'].download()
+                bob.sendMessage(m.chat, {audio: {url: dl_url}, mimetype: `audio/mp4`, ptt: true}, {quoted: m})
+            }}
+            break
              case 'demote': case 'unadmin': {
                 if (!m.isGroup) return reply(global.mess.group)
-                if (!isBotGroupAdmins) return reply(global.mess.botAdmin)
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
+                
                 if (!quoted) return reply('Reply Pesan')
                  if (quoted) {
                 number = quoted.sender
@@ -880,40 +821,40 @@ Jam : ${jam}`) + `
              break
              case 'closegc': case 'close': case 'tutup': {
                 if (!m.isGroup) return reply(global.mess.group)
-                if (!isBotGroupAdmins) return reply(global.mess.botAdmin)
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
+                
                 bob.groupSettingUpdate(m.chat, 'announcement')
                 reply('Sukses Menutup Grup')
              }
              break
              case 'opengc': case 'open': case 'buka': {
                 if (!m.isGroup) return reply(global.mess.group)
-                if (!isBotGroupAdmins) return reply(global.mess.botAdmin)
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
+                
                 bob.groupSettingUpdate(m.chat, 'not_announcement')
                 reply('Sukses Membuka Grup')
              }
              break
              case 'lock': case 'locked': case 'kunci': {
                 if (!m.isGroup) return reply(global.mess.group)
-                if (!isBotGroupAdmins) return reply(global.mess.botAdmin)
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
+                
                 bob.groupSettingUpdate(m.chat, 'locked')
                 reply('Sukses Mengunci Edit Setting')
              }
              break
              case 'unlock': case 'unlocked': {
                 if (!m.isGroup) return reply(global.mess.group)
-                if (!isBotGroupAdmins) return reply(global.mess.botAdmin)
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
+                
                 bob.groupSettingUpdate(m.chat, 'unlocked')
                 reply('Sukses Membuka Edit Setting')
              }
              break
              case 'setname': case 'setnamegc': {
                 if (!m.isGroup) return reply(global.mess.group)
-                if (!isBotGroupAdmins) return reply(global.mess.botAdmin)
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
+                
                 if (!q) return reply(`Masukan Text Nama Group!\n${prefix}setname Dia kekasih mu yang Baru`)
                 bob.groupUpdateSubject(m.chat, q)
                 reply(`Nama Grup DiGanti :\n${q}`)
@@ -921,8 +862,8 @@ Jam : ${jam}`) + `
              break
              case 'setdesc': case 'setdesk': {
                 if (!m.isGroup) return reply(global.mess.group)
-                if (!isBotGroupAdmins) return reply(global.mess.botAdmin)
-                if (!isGroupAdmins) return reply(global.mess.admin)
+                
+                
                 if (!q) return reply(`Masukan Text Deskripsi Group!\n${prefix}setdesc Dia kekasih mu yang Baru`)
                 bob.groupUpdateDescription(m.chat, q)
                 reply(`Deskripsi DiGanti :\n${q}`)
@@ -1121,6 +1062,7 @@ Jam : ${jam}`) + `
                         }
             }
             break
+             
             case 'removebg': case 'rb':{
             if (!isQuotedImage && !isImage)return reply(`Kirim Gambar dengan caption ${CmD} atau reply gambar dengan text ${CmD}!`)
             if (isQuotedImage || isImage ) {
@@ -1163,8 +1105,7 @@ Jam : ${jam}`) + `
             }
             break
             case 'gempa': case 'infogempa': {
-                if (isLimit(m.sender, limitCount, limit)) return reply (`Poin kamu sudah habis silahkan kirim ${prefix}poin untuk mengecek Point Yang Tersedia`)
-            limitAdd(sender, limit)
+
                 dl.gempa().then ( data => {
                     var text = `*[ INFO GEMPA TERKINI ]*\n\n*Locate :* ${data[0].locate}\n*Warning :* ${data[0].warning[0]}\n*Tanggal :* ${data[0].date}\n*Magnitude :* ${data[0].magnitude}\n*Jarak :* ${data[0].depth}\n*Desk :* ${data[0].location}`
                     sendbut(m.chat, text, `#dashboard`, `Back To Menu 🔙`, tgl + ' ' + jam)
