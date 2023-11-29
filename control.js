@@ -72,9 +72,10 @@ let tebaklagu = []
 const tiktokresi = "2a78c6d3b550e355dc01cb366b146ab4" //Api Punya Gua anjing
 
 
+
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
-	apiKey: `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`,
+	apiKey: `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`,
 });
 const openai = new OpenAIApi(configuration);
 
@@ -159,9 +160,13 @@ module.exports = bob = async (bob, m, chatUpdate, store, welcome, mentioned) => 
         // Public & Self
         if (!bob.public) {
             if (!m.key.fromMe) return
-        }
+        } else { 
+            if (budy.startsWith('Arasya')){
+        bob.sendMessage(m.chat, {audio: fs.readFileSync(`me.mp3`), mimetype: 'audio/mp4', ptt: true})
+    }
+}
 
-        //** cmd
+    //** cmd
         const CmDPlugins = isCmd ? body.slice(1).trim().split(/ +/).shift().toLowerCase() : null
 
         //** plugins
@@ -500,18 +505,8 @@ function randomNomor(min, max = null) {
     }
 
 
-        /*Privasi User!
-        if (!m.isGroup) {
-            try {
-                await bob.chatModify({
-                    delete: true,
-                    lastMessages: [{ key: m.key, messageTimestamp: m.messageTimestamp }]
-                },
-                m.sender)
-            } catch (e) {
-                reply(`Habis Restart. Silahkan Ulangi Kembali Command nya ya`)
-            } 
-        }*/
+    //prompt chatgpt
+const promptgpt = `Nama kamu adalah Edith, kamu adalah asisten pribadi Arasya, dan arasya adalah satu satunya orang yang bisa mengakses kamu, Tanggal sekarang adalah ${tgl}, jam sekarang adalah : ${jam}, Sekolah Arasya di SMK Muhammadiyah 3 Tangsel, Nomor Absen Arasya : 5, Arasya duduk di kelas 12 SMK, Hobby : Photograph, dilarang ucapkan kalimat membantu`
         
          if (!m.isGroup && isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32m ✓ \x1b[1;37m]', color(pushname), 'use', color(command), 'args :', color(args.length))
             if (isCmd && m.isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32m ✓ \x1b[1;37m]', color(pushname), 'use', color(command), 'in group', color(groupName), 'args :', color(args.length))
@@ -768,42 +763,45 @@ Jam : ${jam}`) + `
                 }
              }
              break
-             case 'play': {
-
+             case 'play':{
                 if (!q) return reply(`Masukan Text Setelah Perintah!\n\n*Example For Voice Not* : ${CmD} Jakarta Hari Ini - For revenge --vn\n*Example For Document :* ${CmD} Jakarta Hari Ini - For revenge -doc\n*Example For Video :* ${CmD} Jakarta Hari Ini - For revenge --video`)
-                loading2()
-                var pasu = `ptt`
-                if (q.includes('--vn')) {
-                var ytserc = await yts(q.replace('--vn', ''))
-                var url = ytserc.all[0].url
-                var yt = await dl.youtubedl(url).catch(async () => await  dl.youtubedl(url))
-                var dl_url = await yt.audio['128kbps'].download()
-                bob.sendMessage(m.chat, {image: {url: yt.thumbnail}, caption: `*[ YOUTUBE PLAY ]*\n\nTitle : ${yt.title}\nSize : 128kbps\nType : Voice Not\n_Audio Sedang Dikirim..._`}, {quoted: m})
-                bob.sendMessage(m.chat, {audio: {url: dl_url}, mimetype: `audio/mp4`, ptt: true}, {quoted: m})
-            } else 
-            if (q.includes('--doc')) {
-                var ytserc = await yts(q.replace('--doc', ''))
-                var url = ytserc.all[0].url
-                var yt = await dl.youtubedl(url).catch(async () => await  dl.youtubedl(url))
-                var dl_url = await yt.audio['128kbps'].download()
-                bob.sendMessage(m.chat, {image: {url: yt.thumbnail}, caption: `*[ YOUTUBE PLAY ]*\n\nTitle : ${yt.title}\nSize : 128kbps\nType : Document\n_Audio Sedang Dikirim..._`}, {quoted: m})
-                bob.sendMessage(m.chat, {document: {url: dl_url}, fileName: yt.title + `.mp3`, caption: yt.title + `\nhttps://my.arsrfii.repl.co`, mimetype: `audio/mp3`})
-            } else 
-            if (q.includes('--video')) {
-                var ytserc = await yts(q.replace('--video', ''))
-                var url = ytserc.all[0].url
-                var yt = await dl.youtubedl(url).catch(async () => await  dl.youtubedl(url))
-                var dl_url = await yt.video['720p'].download()
-                bob.sendMessage(m.chat, {image: {url: yt.thumbnail}, caption: `*[ YOUTUBE PLAY ]*\n\nTitle : ${yt.title}\nSize : 128kbps\nType : Video\nVideo Sedang Dikirim..._`}, {quoted: m})
-                bob.sendMessage(m.chat, {video: {url: dl_url}, caption: yt.title + `\nhttps://my.arsrfii.repl.co`}, {quoted: m})
-            } else {
-                var ytserc = await yts(q)
-                var url = ytserc.all[0].url
-                var yt = await dl.youtubedl(url).catch(async () => await  dl.youtubedl(url))
-                var dl_url = await yt.audio['128kbps'].download()
-                bob.sendMessage(m.chat, {audio: {url: dl_url}, mimetype: `audio/mp4`, ptt: true}, {quoted: m})
-            }}
-            break
+                reply(mess.wait)
+                var cariyutup = await yts(q)
+                var url = cariyutup.all[0].url
+                var judul = cariyutup.all[0].title
+                var thumbnailnya = cariyutup.all[0].image
+                var desc = cariyutup.all[0].description
+                var teksyutup = `*[ DOWNLOAD YOUTUBE PLAY ]*\n\n 📛 Judul : ${judul}\n🔗 Link : ${url}\n📃 Deskripsi : ${desc}\n\nSedang Mengirim...`
+                bob.sendMessage(m.chat, {image: {url: thumbnailnya}, caption: teksyutup}, {quoted: m})
+                const streamPipeline = promisify(pipeline);
+                const audioStream = ytdl(url, {
+                    filter: 'audioonly',
+                    quality: 'highestaudio',
+                  });
+                  const sampah = os.tmpdir();
+                  const writableStream = fs.createWriteStream(`${sampah}/${title}.mp3`);
+                
+                  await streamPipeline(audioStream, writableStream);
+                  bob.sendMessage(m.chat, {audio: {url: `${sampah}/${title}.mp3`}, fileName: title, mimetype: 'audio/mp4'}, {quoted: m})
+                }
+                break
+                case 'yts': case 'ytsearch': {  
+                if (!q) return reply(`Masukan Text\nExample ${prefix}yts Jakarta Hari Ini - For Revenge`)
+                var teskd = `YOUTUBE SEARCH\n\n`
+                yts(q).then( data => {
+                    let yt = data.all
+                    var jumlah = 15
+                    if (yt.length < jumlah) jumlah = yt.length
+                    var no = 0
+                    let txt = `*YOUTUBE SEARCH*\n\n*Data berhasil didapatkan*\n*Hasil pencarian dari : ${q}*`
+                    for (let i = 0; i < jumlah; i++) {
+                    no += 1
+                    txt += `\n─────────────────\n\n*No Urutan : ${no.toString()}*\n*▢ Judul :* ${yt[i].title}\n*▢ ID :* ${yt[i].videoId}\n*▢ Channel :* ${yt[i].author}\n*▢ Upload :* ${yt[i].ago}\n*▢ Ditonton :* ${yt[i].views}\n*▢ Duration :* ${yt[i].timestamp}\n*▢ URL :* ${yt[i].url}\n`
+                    }
+                    bob.sendMessage(m.chat, { image: { url: yt[0].image }, caption: txt }, { quoted: m })
+                    })
+                }
+                break
              case 'demote': case 'unadmin': {
                 if (!m.isGroup) return reply(global.mess.group)
                 
@@ -1212,32 +1210,38 @@ Jam : ${jam}`) + `
                     //Akhir owner menu
                     default:
                     if ( isChatBot ) {
-                        if (m.text) {
                             console.log("->[\x1b[1;32mNew\x1b[1;37m]", color('Question From', 'yellow'), color(pushname, 'lightblue'), `: "${m.text}"`)
-                            bob.sendPresenceUpdate("recording", m.chat);
+                            bob.sendPresenceUpdate("composing", m.chat);
                             try {
                                 const response = await openai.createChatCompletion({
                                     model: "gpt-3.5-turbo",
                                     messages: [
-                                        {role: "system", content: "Ini Adalah Jojo Bot, Yang Di Ciptakan Oleh Arasya"},
+                                        {role: "system", content: promptgpt},
                                         {role: "user", content: m.text}
                                     ]
                                 })
                                 reply(response.data.choices[0].message.content)
                     } catch (e) {
-                        reply("Kasih waktu dikit kek buat baca.")
+                        reply("Server Tidak stabil")
                     } 
-                }  
+            
             }
-            if (budy.startsWith('Arasya'))
-            try {
 
-                {
-                   bob.sendMessage(m.chat, {audio: fs.readFileSync(`me.mp3`), mimetype: 'audio/mp4', ptt: true})
-                }
-            } catch (err) { 
-                console.log(`:v`)
+            
+            if (budy.startsWith('hey edith')) {
+                if (isChatBot) return reply(`Hei ${pushname}, How are you today?`)
+                  chatbot.push(m.chat)
+                  fs.writeFileSync('./assets/db/chatbot.json', JSON.stringify(chatbot, null, 2))
+                  reply(`Hay ${pushname}, The weather is sunny today`)
             }
+            if (budy.includes('thanks close')) {
+                if (!isChatBot) return reply(`system shuts down, have a nice day ${pushname}`)
+                  var posi = chatbot.indexOf(m.chat)
+                  chatbot.splice(posi, 1)
+                  fs.writeFileSync('./assets/db/chatbot.json', JSON.stringify(chatbot, null, 2))
+                  reply(`system shuts down, have a nice day ${pushname}`)
+            }
+  
                 if (budy.startsWith('x')) {
                     if (!isCreator) return reply(mess.owner)
                     

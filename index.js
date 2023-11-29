@@ -133,29 +133,8 @@ async function startBot() {
             console.log(err)
         }
     })
-    bob.ev.on('group-participants.update', async (data) => {
-        const isWelcome = welcome.includes(data.id) ? true : false
-        if (isWelcome) {
-        try {
-        let metadata = await bob.groupMetadata(data.id)
-          for (let i of data.participants) {
-          try {
-            var pp_user = await bob.profilePictureUrl(i, 'image')
-          } catch {
-            var pp_user = `https://telegra.ph/file/6ea2e0f36eae5ea3a5465.jpg`
-          }
-          if (data.action == "add") {
-            bob.sendMessage(data.id, {image: {url: pp_user}, caption: `Hallo @${i.split("@")[0]}, Selamat Datang Di Grup ${metadata.subject}`, mentions: [i]})
-          } else if (data.action == "remove") {
-            bob.sendMessage(data.id, {image: {url: pp_user}, caption: `Selamat Tinggal @${i.split("@")[0]}`, mentions: [i]})
-          }
-          }
-        } catch (e) {
-          console.log(e)
-        }
-    }
-    }
-      )
+
+                
 
     // Setting
     bob.decodeJid = (jid) => {
